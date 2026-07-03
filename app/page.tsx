@@ -1,8 +1,15 @@
-export default function Home() {
+import HeroSection from "@/components/HeroSection"
+import ProgramsSection from "@/components/ProgramsSection"
+import TrustMetricsSection from "@/components/TrustMetricsSection"
+import AdmissionForm from "@/components/AdmissionForm"
+
+export default function Page() {
   return (
     <main>
-      <h1>Welcome to Planet Master's Nursery</h1>
-      <p>Building the foundation for tomorrow.</p>
+      <HeroSection />
+      <ProgramsSection />
+      <TrustMetricsSection />
+      <AdmissionForm />
     </main>
-  );
+  )
 }
