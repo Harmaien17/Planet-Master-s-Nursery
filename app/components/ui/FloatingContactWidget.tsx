@@ -4,8 +4,8 @@ import { useState } from "react"
 import { MessageCircle, Phone, Rocket } from "lucide-react"
 
 const WHATSAPP_URL =
-  "https://wa.me/91XXXXXXXXXX?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20admissions%20at%20Planet%20Master%27s%20Nursery"
-const PHONE_NUMBER = "+91XXXXXXXXXX"
+  "https://wa.me/919579534952?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20admissions%20at%20Planet%20Master%27s%20Nursery"
+const PHONE_NUMBER = "+919579534952"
 
 export default function FloatingContactWidget() {
   // Collapsed by default so it never obscures content on first load (esp. mobile).
