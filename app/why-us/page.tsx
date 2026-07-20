@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import PageHeader from "@/components/PageHeader"
 import TrustMetricsSection from "@/components/TrustMetricsSection"
 import CTASection from "@/components/CTASection"
-import { Sparkles, Utensils, Bus, Palette, BookOpenCheck, Users } from "lucide-react"
+import { Sparkles, Utensils, Bus, Palette, BookOpenCheck, Users, MapPin } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Why Us — Planet Master's Nursery",
@@ -19,7 +19,7 @@ const DIFFERENTIATORS = [
   {
     Icon: Bus,
     title: "Safe Pickup & Drop",
-    text: "Optional supervised transport with trained staff for peace of mind.",
+    text: "Supervised pickup & drop with trained staff for peace of mind.",
     tint: "bg-teal-100 text-teal-600",
   },
   {
@@ -83,6 +83,36 @@ export default function WhyUsPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Map Section */}
+      <section className="bg-white px-6 py-20 md:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-amber-100 px-4 py-1 text-sm font-medium text-amber-700">
+            <MapPin className="h-4 w-4" />
+            Our Campus
+          </div>
+          <h2 className="text-balance text-center text-3xl font-extrabold text-slate-900 sm:text-4xl">
+            Come See For Yourself
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-slate-600">
+            Located in the heart of Hadapsar. We'd love to show you around our safe and creative learning environment.
+          </p>
+
+          <div className="mt-12 overflow-hidden rounded-3xl border border-black/5 shadow-xl bg-slate-50">
+            <iframe
+              title="Planet Master's Nursery Location"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Planet%20master's%20nursery,%20Satav%20Plot,%20Utkarsh%20Nagar,%20Hadapsar,%20Pune,%20Maharashtra%20411028&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+              className="w-full grayscale-[20%] transition-all duration-500 hover:grayscale-0"
+            />
           </div>
         </div>
       </section>
