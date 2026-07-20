@@ -1,7 +1,7 @@
 import HeroSection from "@/components/HeroSection"
 import ProgramsSection from "@/components/ProgramsSection"
 import TrustMetricsSection from "@/components/TrustMetricsSection"
-import AdmissionForm from "@/components/AdmissionForm"
+import CTASection from "@/components/CTASection"
 
 export default function Page() {
   return (
@@ -9,7 +9,7 @@ export default function Page() {
       <HeroSection />
       <ProgramsSection />
       <TrustMetricsSection />
-      <AdmissionForm />
+      <CTASection />
     </main>
   )
 }

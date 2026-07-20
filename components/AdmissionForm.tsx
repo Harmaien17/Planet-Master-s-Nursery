@@ -33,17 +33,20 @@ const AGE_OPTIONS = [
 const PROGRAM_OPTIONS = ["Playgroup", "Nursery", "Lower KG", "Upper KG"]
 
 const INPUT_BASE =
-  "w-full bg-[#0B0B2E] border rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+  "w-full bg-white border rounded-2xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all"
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_REGEX = /^\d{10}$/
+
+const WHATSAPP_URL =
+  "https://wa.me/919579534952?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20admissions%20at%20Planet%20Master%27s%20Nursery"
 
 export default function AdmissionForm() {
   const [formData, setFormData] = useState<FormData>(INITIAL_DATA)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [submitError, setSubmitError] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -97,11 +100,22 @@ export default function AdmissionForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitError(false)
+    setSubmitError(null)
 
     const nextErrors = validate()
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
+      return
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
+
+    // No key configured at all — fail fast with a clear, actionable message
+    // instead of letting the request go out and bounce back as a generic error.
+    if (!accessKey) {
+      setSubmitError(
+        "Form isn't fully set up yet (missing Web3Forms access key). Please WhatsApp us directly and we'll get back to you right away.",
+      )
       return
     }
 
@@ -114,7 +128,7 @@ export default function AdmissionForm() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          access_key: accessKey,
           subject: "New Admission Enquiry — Planet Master's Nursery",
           from_name: "Planet Master's Nursery Website",
           parent_name: formData.name,
@@ -130,10 +144,10 @@ export default function AdmissionForm() {
       if (res.ok && result.success) {
         setIsSuccess(true)
       } else {
-        setSubmitError(true)
+        setSubmitError(result?.message || "Something went wrong. Please try again or WhatsApp us directly.")
       }
     } catch {
-      setSubmitError(true)
+      setSubmitError("Network error. Please check your connection and try again, or WhatsApp us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -143,54 +157,54 @@ export default function AdmissionForm() {
     setFormData(INITIAL_DATA)
     setErrors({})
     setIsSuccess(false)
-    setSubmitError(false)
+    setSubmitError(null)
   }
 
   return (
-    <section className="relative bg-[#0B0B2E] px-6 py-20 md:px-12">
+    <section className="relative bg-[#FBF7FF] px-6 py-20 md:px-12">
       {/* Radial glow behind the card */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(147,51,234,0.12), transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(236,72,153,0.08), transparent 70%)",
         }}
         aria-hidden="true"
       />
 
       <div className="relative mx-auto max-w-2xl text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/40 bg-purple-400/10 px-4 py-1.5 text-sm font-medium text-purple-200">
+        <span className="inline-flex items-center gap-2 rounded-full border border-purple-300 bg-purple-100 px-4 py-1.5 text-sm font-medium text-purple-700">
           Mission Control
         </span>
-        <h2 className="mt-5 text-balance text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+        <h2 className="mt-5 text-balance text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
           Begin the Countdown to Admission
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-pretty text-base leading-relaxed text-white/70">
+        <p className="mx-auto mt-4 max-w-xl text-pretty text-base leading-relaxed text-slate-600">
           Reserve your little explorer&apos;s seat for the 2026–27 launch. Fill in the details below and our
           admissions crew will be in touch within 24 hours.
         </p>
       </div>
 
-      <div className="relative mx-auto mt-12 max-w-2xl rounded-3xl border border-white/10 bg-[#12123A]/80 p-6 shadow-2xl backdrop-blur-md sm:p-10">
-        <Rocket className="absolute right-6 top-6 h-12 w-12 text-white/10" aria-hidden="true" />
+      <div className="relative mx-auto mt-12 max-w-2xl rounded-3xl border border-black/5 bg-white p-6 shadow-xl sm:p-10">
+        <Rocket className="absolute right-6 top-6 h-12 w-12 text-purple-100" aria-hidden="true" />
 
         {isSuccess ? (
           <div className="flex flex-col items-center py-10 text-center">
             <div className="relative mb-4">
               <div
-                className="absolute inset-0 rounded-full bg-green-400/30 blur-xl"
+                className="absolute inset-0 rounded-full bg-green-300/40 blur-xl"
                 aria-hidden="true"
               />
-              <CheckCircle2 className="relative h-16 w-16 text-green-400" aria-hidden="true" />
+              <CheckCircle2 className="relative h-16 w-16 text-green-500" aria-hidden="true" />
             </div>
-            <h3 className="text-2xl font-bold text-white">Liftoff Successful! 🚀</h3>
-            <p className="mt-3 max-w-sm text-pretty leading-relaxed text-white/70">
+            <h3 className="text-2xl font-bold text-slate-900">Liftoff Successful! 🚀</h3>
+            <p className="mt-3 max-w-sm text-pretty leading-relaxed text-slate-600">
               Our team will contact you within 24 hours.
             </p>
             <button
               type="button"
               onClick={resetForm}
-              className="mt-8 rounded-full border border-white/30 px-6 py-3 text-white transition-colors hover:bg-white/10"
+              className="mt-8 rounded-full border border-slate-300 px-6 py-3 text-slate-700 transition-colors hover:bg-slate-50"
             >
               Submit Another Response
             </button>
@@ -199,7 +213,7 @@ export default function AdmissionForm() {
           <form onSubmit={handleSubmit} noValidate className="space-y-5">
             {/* Parent Name */}
             <div>
-              <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-white/70">
+              <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-600">
                 Parent Name
               </label>
               <input
@@ -213,8 +227,8 @@ export default function AdmissionForm() {
                 aria-invalid={!!errors.name}
                 className={`${INPUT_BASE} ${
                   errors.name
-                    ? "border-red-500 focus:ring-red-400"
-                    : "border-white/20 focus:ring-purple-400"
+                    ? "border-red-400 focus:ring-red-300"
+                    : "border-slate-200 focus:ring-purple-300"
                 }`}
               />
               {errors.name && <FieldError message={errors.name} />}
@@ -222,7 +236,7 @@ export default function AdmissionForm() {
 
             {/* Child's Age */}
             <div>
-              <label htmlFor="age" className="mb-1.5 block text-sm font-medium text-white/70">
+              <label htmlFor="age" className="mb-1.5 block text-sm font-medium text-slate-600">
                 Child&apos;s Age
               </label>
               <div className="relative">
@@ -234,24 +248,24 @@ export default function AdmissionForm() {
                   onBlur={handleBlur}
                   aria-invalid={!!errors.age}
                   className={`${INPUT_BASE} appearance-none pr-10 ${
-                    formData.age ? "text-white" : "text-white/30"
+                    formData.age ? "text-slate-900" : "text-slate-400"
                   } ${
                     errors.age
-                      ? "border-red-500 focus:ring-red-400"
-                      : "border-white/20 focus:ring-purple-400"
+                      ? "border-red-400 focus:ring-red-300"
+                      : "border-slate-200 focus:ring-purple-300"
                   }`}
                 >
-                  <option value="" disabled className="text-white/30">
+                  <option value="" disabled>
                     Select an age range
                   </option>
                   {AGE_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value} className="bg-[#0B0B2E] text-white">
+                    <option key={opt.value} value={opt.value}>
                       {opt.label}
                     </option>
                   ))}
                 </select>
                 <ChevronDown
-                  className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-white/50"
+                  className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
                   aria-hidden="true"
                 />
               </div>
@@ -260,7 +274,7 @@ export default function AdmissionForm() {
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-white/70">
+              <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-slate-600">
                 Phone Number
               </label>
               <input
@@ -275,8 +289,8 @@ export default function AdmissionForm() {
                 aria-invalid={!!errors.phone}
                 className={`${INPUT_BASE} ${
                   errors.phone
-                    ? "border-red-500 focus:ring-red-400"
-                    : "border-white/20 focus:ring-purple-400"
+                    ? "border-red-400 focus:ring-red-300"
+                    : "border-slate-200 focus:ring-purple-300"
                 }`}
               />
               {errors.phone && <FieldError message={errors.phone} />}
@@ -284,7 +298,7 @@ export default function AdmissionForm() {
 
             {/* Email Address */}
             <div>
-              <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-white/70">
+              <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-600">
                 Email Address
               </label>
               <input
@@ -298,8 +312,8 @@ export default function AdmissionForm() {
                 aria-invalid={!!errors.email}
                 className={`${INPUT_BASE} ${
                   errors.email
-                    ? "border-red-500 focus:ring-red-400"
-                    : "border-white/20 focus:ring-purple-400"
+                    ? "border-red-400 focus:ring-red-300"
+                    : "border-slate-200 focus:ring-purple-300"
                 }`}
               />
               {errors.email && <FieldError message={errors.email} />}
@@ -307,7 +321,7 @@ export default function AdmissionForm() {
 
             {/* Program Choice */}
             <div>
-              <label htmlFor="program" className="mb-1.5 block text-sm font-medium text-white/70">
+              <label htmlFor="program" className="mb-1.5 block text-sm font-medium text-slate-600">
                 Program Choice
               </label>
               <div className="relative">
@@ -319,24 +333,24 @@ export default function AdmissionForm() {
                   onBlur={handleBlur}
                   aria-invalid={!!errors.program}
                   className={`${INPUT_BASE} appearance-none pr-10 ${
-                    formData.program ? "text-white" : "text-white/30"
+                    formData.program ? "text-slate-900" : "text-slate-400"
                   } ${
                     errors.program
-                      ? "border-red-500 focus:ring-red-400"
-                      : "border-white/20 focus:ring-purple-400"
+                      ? "border-red-400 focus:ring-red-300"
+                      : "border-slate-200 focus:ring-purple-300"
                   }`}
                 >
-                  <option value="" disabled className="text-white/30">
+                  <option value="" disabled>
                     Select a program
                   </option>
                   {PROGRAM_OPTIONS.map((program) => (
-                    <option key={program} value={program} className="bg-[#0B0B2E] text-white">
+                    <option key={program} value={program}>
                       {program}
                     </option>
                   ))}
                 </select>
                 <ChevronDown
-                  className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-white/50"
+                  className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
                   aria-hidden="true"
                 />
               </div>
@@ -345,8 +359,8 @@ export default function AdmissionForm() {
 
             {/* Optional Message */}
             <div>
-              <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-white/70">
-                Message <span className="text-white/40">(optional)</span>
+              <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-600">
+                Message <span className="text-slate-400">(optional)</span>
               </label>
               <textarea
                 id="message"
@@ -355,15 +369,25 @@ export default function AdmissionForm() {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Anything you'd like us to know?"
-                className={`${INPUT_BASE} resize-none border-white/20 focus:ring-purple-400`}
+                className={`${INPUT_BASE} resize-none border-slate-200 focus:ring-purple-300`}
               />
             </div>
 
             {/* Submit error banner */}
             {submitError && (
-              <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-                <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <span>Something went wrong. Please try again or WhatsApp us directly.</span>
+              <div className="mb-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                <span>
+                  {submitError}{" "}
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline underline-offset-2"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </span>
               </div>
             )}
 
@@ -371,7 +395,7 @@ export default function AdmissionForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 py-4 font-bold text-[#0B0B2E] shadow-lg shadow-orange-500/30 transition-transform ${
+              className={`flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 py-4 font-bold text-white shadow-lg shadow-pink-500/30 transition-transform ${
                 isSubmitting ? "cursor-not-allowed opacity-70" : "hover:scale-[1.02]"
               }`}
             >
@@ -396,7 +420,7 @@ export default function AdmissionForm() {
 
 function FieldError({ message }: { message: string }) {
   return (
-    <p className="mt-1 flex items-center gap-1 text-xs text-red-400" role="alert">
+    <p className="mt-1 flex items-center gap-1 text-xs text-red-500" role="alert">
       <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       {message}
     </p>

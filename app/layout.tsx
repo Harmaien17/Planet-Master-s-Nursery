@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import FloatingContactWidget from '@/components/FloatingContactWidget'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({
@@ -11,9 +13,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: "Planet Master's Nursery — Where Little Explorers Become Big Dreamers",
+  description:
+    "A premium early-learning journey for ages 2-6. Playgroup, Nursery, Lower KG and Upper KG admissions open for 2026-27.",
   icons: {
     icon: [
       {
@@ -47,9 +49,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-[#0B0B2E]`}>
-      <body className="font-sans antialiased">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-[#FBF7FF]`}>
+      <body className="font-sans antialiased bg-[#FBF7FF] text-slate-900">
+        <Navbar />
         {children}
+        <Footer />
         <FloatingContactWidget />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
