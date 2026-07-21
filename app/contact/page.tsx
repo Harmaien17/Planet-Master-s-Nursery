@@ -37,7 +37,7 @@ const CONTACT_CARDS = [
   {
     Icon: Clock,
     title: "Office Hours",
-    detail: "Mon – Sat, 8:30 AM – 4:00 PM",
+    detail: "Mon – Sat, 10:00 AM – 4:00 PM",
     tint: "bg-amber-100 text-amber-600",
   },
 ]
@@ -92,11 +92,19 @@ export default function ContactPage() {
             <ContactForm />
 
             <div className="flex flex-col gap-6">
-              <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-3xl border border-black/5 bg-gradient-to-br from-teal-100 to-purple-100 shadow-sm lg:h-full">
-                <MapPin className="h-10 w-10 text-purple-500" aria-hidden="true" />
-                <p className="max-w-xs text-center text-sm text-slate-600">
-                  Campus map placeholder — embed a Google Maps iframe here with your exact address.
-                </p>
+              {/* Added overflow-hidden so the iframe doesn't break the rounded corners */}
+              <div className="h-64 overflow-hidden rounded-3xl border border-black/5 shadow-sm lg:h-full">
+                <iframe
+                  title="Campus Map Placeholder"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.04360434057!2d73.7805654!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="bg-slate-100"
+                />
               </div>
             </div>
           </div>
