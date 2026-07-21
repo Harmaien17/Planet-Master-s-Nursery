@@ -1,8 +1,5 @@
-// Central source of truth for SEO metadata, structured data, and the sitemap.
-// Update SITE_URL once a custom domain is connected (or set NEXT_PUBLIC_SITE_URL
-// in Vercel's environment variables to override it without a code change).
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://planet-masters-nursery.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://planet-master-s-nursery.vercel.app"
 
 export const SITE_NAME = "Planet Master's Nursery"
 
@@ -85,10 +82,42 @@ export function getLocalBusinessSchema() {
     ],
     sameAs: BUSINESS.sameAs,
     makesOffer: [
-      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Playgroup (Age 2–3)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Nursery (Age 3–4)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Lower KG (Age 4–5)" } },
-      { "@type": "Offer", itemOffered: { "@type": "Course", name: "Upper KG (Age 5–6)" } },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Playgroup (Age 2–3)",
+          description: "Sensory play, motor skill discovery, and social bonding for toddlers.",
+          provider: { "@type": "Organization", name: BUSINESS.name },
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Nursery (Age 3–4)",
+          description: "Early phonics, vocabulary building, and hands-on counting.",
+          provider: { "@type": "Organization", name: BUSINESS.name },
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Lower KG (Age 4–5)",
+          description: "Reading readiness, sight words, and curiosity-led science experiments.",
+          provider: { "@type": "Organization", name: BUSINESS.name },
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Upper KG (Age 5–6)",
+          description: "Fluent reading, sentence writing, and big-school transition readiness.",
+          provider: { "@type": "Organization", name: BUSINESS.name },
+        },
+      },
     ],
   }
 }
