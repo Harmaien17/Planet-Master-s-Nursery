@@ -21,7 +21,10 @@ export const BUSINESS = {
   latitude: 18.4988052,
   longitude: 73.9449724,
   // Add real profile URLs once available (Instagram, Facebook, Google Business Profile, etc.)
-  sameAs: [] as string[],
+  sameAs: [
+    "https://share.google/jKQZBk8QwuojYSVgs",
+    "https://youtube.com/@sairashaikh6220"
+  ],
 }
 
 export const FULL_ADDRESS = `${BUSINESS.streetAddress}, ${BUSINESS.addressLocality}, Pune, ${BUSINESS.addressRegion} ${BUSINESS.postalCode}`
