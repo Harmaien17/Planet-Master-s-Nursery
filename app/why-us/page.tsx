@@ -108,11 +108,8 @@ export default function WhyUsPage() {
             Come See For Yourself
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-slate-600">
-<<<<<<< HEAD
             Located in the heart of Hadapsar. We&apos;d love to show you around our safe and creative learning environment.
-=======
             Located in the heart of Hadapsar. We'd love to show you around our safe and creative learning environment.
->>>>>>> 2ca54d2f38290d81371d15e6024f7494172070b2
           </p>
 
           <div className="mt-12 overflow-hidden rounded-3xl border border-black/5 shadow-xl bg-slate-50">
