@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import FloatingContactWidget from '@/components/FloatingContactWidget'
 import Navbar from '@/components/Navbar'
@@ -47,9 +48,18 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: 'en_IN',
     type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Planet Master's Nursery Hadapsar Pune",
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    images: [`${SITE_URL}/og-image.jpg`],
   },
 }
 
@@ -70,9 +80,27 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-[#FBF7FF]`}>
+      <head>
+        {/* Google Analytics Tag */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-G19CZXHDRL"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-G19CZXHDRL');
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased bg-[#FBF7FF] text-slate-900">
-        {/* LocalBusiness / Preschool structured data — helps Google Search & Maps
-            understand this is a local preschool serving Hadapsar, Pune. */}
+        {/* LocalBusiness / Preschool structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
