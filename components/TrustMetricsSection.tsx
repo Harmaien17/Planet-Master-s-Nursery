@@ -9,6 +9,8 @@ import {
   MapPin,
   Heart,
   CheckCircle2,
+  Star,
+  Sparkles,
 } from "lucide-react"
 
 function useCountUp(target: number, duration = 1500, start = false) {
@@ -21,7 +23,6 @@ function useCountUp(target: number, duration = 1500, start = false) {
 
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1)
-      // easeOutCubic for a natural deceleration
       const eased = 1 - Math.pow(1 - progress, 3)
       setValue(Math.round(eased * target))
       if (progress < 1) {
@@ -61,14 +62,14 @@ function CounterCard({
 
   return (
     <div
-      className={`${gradient} ${border} rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm`}
+      className={`${gradient} ${border} rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm relative overflow-hidden`}
     >
-      <div className="mb-2">{icon}</div>
-      <div className={`text-4xl font-extrabold ${numberColor}`}>
+      <div className="mb-2 relative z-10">{icon}</div>
+      <div className={`text-4xl font-extrabold ${numberColor} relative z-10`}>
         {value}
         {suffix}
       </div>
-      <p className="text-slate-500 text-sm mt-1">{label}</p>
+      <p className="text-slate-500 text-sm mt-1 relative z-10">{label}</p>
     </div>
   )
 }
@@ -96,9 +97,14 @@ export default function TrustMetricsSection() {
   }, [])
 
   const safetyChecklist = [
-    "CCTV Monitored",
     "Hygienic Sanitized Campus",
     "Trained Emergency Staff",
+    "Child-Safe Non-Toxic Materials",
+    "Secure Entry & Exit Logs",
+    "First-Aid & CPR Certified Teachers",
+    "Daily Toy Disinfection",
+    "Child-Proofed Play Zones",
+    "Allergy-Aware Environment",
   ]
 
   return (
@@ -106,18 +112,83 @@ export default function TrustMetricsSection() {
       ref={sectionRef}
       className="relative overflow-hidden bg-[#FBF7FF] py-20 px-6 md:px-12"
     >
-      {/* Decorative blurred pastel planets — desktop only */}
-      <div
-        className="pointer-events-none absolute -left-32 top-10 hidden h-80 w-80 rounded-full bg-amber-200 opacity-30 blur-3xl md:block"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -right-32 bottom-0 hidden h-80 w-80 rounded-full bg-purple-200 opacity-30 blur-3xl md:block"
-        aria-hidden="true"
-      />
+      {/* ========================================= */}
+      {/* 🚀 MASSIVE BACKGROUND GALAXY ELEMENTS 🚀 */}
+      {/* ========================================= */}
+      
+      {/* Ambient Glows */}
+      <div className="pointer-events-none absolute -left-32 top-10 hidden h-[500px] w-[500px] rounded-full bg-amber-200/30 blur-[100px] md:block" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 hidden h-[500px] w-[500px] rounded-full bg-purple-200/30 blur-[100px] md:block" aria-hidden="true" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-100/40 blur-[80px] md:block" aria-hidden="true" />
+
+      {/* Scattered Stars & Sparkles */}
+      <div className="absolute top-12 right-10 md:right-32 text-amber-300/60 animate-[spin_15s_linear_infinite] pointer-events-none">
+        <Star className="w-12 h-12" fill="currentColor" />
+      </div>
+      <div className="absolute top-40 left-10 md:left-20 text-pink-300/50 animate-[spin_20s_linear_infinite] pointer-events-none">
+        <Star className="w-8 h-8" fill="currentColor" />
+      </div>
+      <div className="absolute bottom-20 left-10 md:left-20 text-purple-300/60 animate-pulse pointer-events-none">
+        <Sparkles className="w-16 h-16" />
+      </div>
+      <div className="absolute top-20 left-1/2 text-teal-300/60 animate-bounce pointer-events-none">
+        <Sparkles className="w-10 h-10" />
+      </div>
+      <div className="absolute bottom-40 right-10 md:right-40 text-amber-300/40 animate-[spin_10s_linear_infinite] pointer-events-none">
+        <Star className="w-6 h-6" fill="currentColor" />
+      </div>
+
+      {/* SVG Planet 1: Saturn (Top Right) */}
+      <div className="absolute -top-10 -right-10 md:top-10 md:-right-10 w-48 h-48 text-pink-300/20 -rotate-12 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+          <circle cx="50" cy="50" r="25" />
+          <ellipse cx="50" cy="50" rx="45" ry="12" transform="rotate(-20 50 50)" fill="none" stroke="currentColor" strokeWidth="5" />
+        </svg>
+      </div>
+
+      {/* SVG Planet 2: Small Moon with Crater (Bottom Left) */}
+      <div className="absolute bottom-10 -left-10 md:bottom-20 md:left-10 w-40 h-40 text-teal-300/20 rotate-12 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+          <circle cx="50" cy="50" r="30" />
+          <circle cx="40" cy="40" r="6" fill="white" opacity="0.4" />
+          <circle cx="65" cy="55" r="10" fill="white" opacity="0.4" />
+          <circle cx="45" cy="70" r="4" fill="white" opacity="0.4" />
+        </svg>
+      </div>
+
+      {/* SVG Planet 3: Striped Gas Giant (Center Left) */}
+      <div className="absolute top-1/2 -left-20 md:-left-10 w-56 h-56 text-purple-300/15 -translate-y-1/2 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+          <circle cx="50" cy="50" r="45" />
+          <path d="M 10 35 Q 50 20 90 35" fill="none" stroke="white" strokeWidth="6" opacity="0.3" />
+          <path d="M 5 50 Q 50 45 95 50" fill="none" stroke="white" strokeWidth="6" opacity="0.3" />
+          <path d="M 10 65 Q 50 70 90 65" fill="none" stroke="white" strokeWidth="6" opacity="0.3" />
+        </svg>
+      </div>
+
+      {/* SVG Planet 4: Ringed Ice Planet (Bottom Right) */}
+      <div className="absolute bottom-0 right-0 w-64 h-64 text-amber-300/15 rotate-45 translate-x-1/4 translate-y-1/4 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+          <circle cx="50" cy="50" r="35" />
+          <ellipse cx="50" cy="50" rx="55" ry="10" transform="rotate(30 50 50)" fill="none" stroke="currentColor" strokeWidth="3" />
+          <ellipse cx="50" cy="50" rx="65" ry="15" transform="rotate(30 50 50)" fill="none" stroke="currentColor" strokeWidth="1" />
+        </svg>
+      </div>
+
+      {/* Floating Stardust (Tiny Dots) */}
+      <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-pink-300/40 animate-pulse pointer-events-none" />
+      <div className="absolute top-3/4 left-1/3 w-2 h-2 rounded-full bg-purple-300/40 animate-bounce pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-4 h-4 rounded-full bg-amber-300/30 animate-pulse pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-2 h-2 rounded-full bg-teal-300/40 animate-ping pointer-events-none" />
+      <div className="absolute top-10 right-1/2 w-3 h-3 rounded-full bg-slate-300/50 animate-pulse pointer-events-none" />
+
+      {/* ========================================= */}
+      {/* END BACKGROUND ELEMENTS */}
+      {/* ========================================= */}
+
 
       {/* Header */}
-      <div className="relative max-w-2xl mx-auto text-center">
+      <div className="relative max-w-2xl mx-auto text-center z-10">
         <span className="inline-flex items-center rounded-full bg-amber-100 border border-amber-300 px-4 py-1.5 text-amber-700 text-sm font-medium">
           Why Parents Trust Us
         </span>
@@ -131,11 +202,21 @@ export default function TrustMetricsSection() {
       </div>
 
       {/* Bento grid */}
-      <div className="relative grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-5 max-w-7xl mx-auto mt-14">
+      <div className="relative grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-5 max-w-7xl mx-auto mt-14 z-10">
+        
         {/* 1. Safety & Hygiene - large feature tile */}
-        <div className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-purple-50 to-purple-100/70 border border-purple-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-          <div>
-            <div className="w-14 h-14 rounded-2xl bg-purple-200/70 border border-purple-300 flex items-center justify-center">
+        <div className="relative overflow-hidden md:col-span-2 md:row-span-2 bg-gradient-to-br from-purple-50 to-purple-100/70 border border-purple-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          
+          {/* Faded Watermark Planet inside the card */}
+          <div className="absolute -bottom-16 -right-16 w-80 h-80 text-purple-300/30 pointer-events-none animate-[spin_40s_linear_infinite]">
+            <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+              <circle cx="50" cy="50" r="30" />
+              <ellipse cx="50" cy="50" rx="45" ry="15" transform="rotate(-30 50 50)" fill="none" stroke="currentColor" strokeWidth="6" />
+            </svg>
+          </div>
+
+          <div className="relative z-10">
+            <div className="w-14 h-14 rounded-2xl bg-purple-200/70 border border-purple-300 flex items-center justify-center backdrop-blur-sm">
               <ShieldCheck className="w-7 h-7 text-purple-600" />
             </div>
             <h3 className="text-2xl font-bold text-slate-900 mt-6">
@@ -147,9 +228,9 @@ export default function TrustMetricsSection() {
               at every launch.
             </p>
           </div>
-          <ul className="flex flex-col gap-3 mt-8">
+          <ul className="relative z-10 flex flex-col gap-3 mt-8">
             {safetyChecklist.map((item) => (
-              <li key={item} className="flex items-center gap-3 text-slate-700">
+              <li key={item} className="flex items-center gap-3 text-slate-700 font-medium">
                 <CheckCircle2 className="w-5 h-5 text-purple-500 shrink-0" />
                 <span>{item}</span>
               </li>
@@ -158,11 +239,11 @@ export default function TrustMetricsSection() {
         </div>
 
         {/* 2. Trained Space Educators */}
-        <div className="md:col-span-2 bg-white border border-black/5 rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-          <div className="w-14 h-14 shrink-0 rounded-full bg-pink-100 border border-pink-200 flex items-center justify-center">
+        <div className="md:col-span-2 bg-white/80 backdrop-blur-md border border-black/5 rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+          <div className="w-14 h-14 shrink-0 rounded-full bg-pink-100 border border-pink-200 flex items-center justify-center relative z-10">
             <GraduationCap className="w-7 h-7 text-pink-500" />
           </div>
-          <div>
+          <div className="relative z-10">
             <h3 className="text-xl font-bold text-slate-900">
               Trained Space Educators
             </h3>
@@ -174,7 +255,7 @@ export default function TrustMetricsSection() {
         </div>
 
         {/* 3. Play-Based Stellar Pedagogy */}
-        <div className="md:col-span-1 bg-white border border-black/5 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+        <div className="md:col-span-1 bg-white/80 backdrop-blur-md border border-black/5 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
           <div className="w-14 h-14 rounded-full bg-teal-100 border border-teal-200 flex items-center justify-center">
             <Puzzle className="w-7 h-7 text-teal-500" />
           </div>

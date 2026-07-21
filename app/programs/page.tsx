@@ -2,11 +2,20 @@ import type { Metadata } from "next"
 import PageHeader from "@/components/PageHeader"
 import ProgramsSection from "@/components/ProgramsSection"
 import CTASection from "@/components/CTASection"
+import GalaxyBackground from "@/components/GalaxyBackground"
+import { SITE_URL } from "@/lib/seo"
 import { Rocket, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Programs — Planet Master's Nursery",
-  description: "Explore our age-based space missions: Playgroup, Nursery, Lower KG and Upper KG.",
+  title: "Preschool & Nursery Programs in Hadapsar, Pune",
+  description:
+    "Explore age-based early childhood education programs at Planet Master's Nursery, Hadapsar: Playgroup, Nursery, Lower KG and Upper KG. Play-based learning in Pune.",
+  alternates: { canonical: `${SITE_URL}/programs` },
+  openGraph: {
+    title: "Programs — Planet Master's Nursery, Hadapsar, Pune",
+    description: "Age-based early childhood education missions for every little astronaut.",
+    url: `${SITE_URL}/programs`,
+  },
 }
 
 const SCHEDULE = [
@@ -24,16 +33,17 @@ export default function ProgramsPage() {
     <main>
       <PageHeader
         eyebrow="Our Missions"
-        title="Programs for Every Little Astronaut"
-        description="From first steps to big-school readiness — a program designed for every stage of early childhood."
+        title="Early Childhood Education Programs in Hadapsar"
+        description="From first steps to big-school readiness — a program designed for every stage of early childhood, right here in Pune."
         Icon={Rocket}
       />
 
       <ProgramsSection />
 
       {/* Daily schedule */}
-      <section className="relative bg-[#FBF7FF] px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-4xl">
+      <section className="relative overflow-hidden bg-[#FBF7FF] px-6 py-20 md:px-12">
+        <GalaxyBackground tone="teal" density="light" />
+        <div className="relative mx-auto max-w-4xl">
           <div className="mx-auto mb-4 w-fit rounded-full bg-teal-100 px-4 py-1 text-sm font-medium text-teal-700">
             A Day in Orbit
           </div>

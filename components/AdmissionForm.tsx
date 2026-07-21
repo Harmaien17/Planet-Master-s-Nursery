@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { Rocket, ChevronDown, AlertCircle, Loader2, CheckCircle2 } from "lucide-react"
+import GalaxyBackground from "@/components/GalaxyBackground"
 
 type FormData = {
   name: string
@@ -162,6 +163,7 @@ export default function AdmissionForm() {
 
   return (
     <section className="relative bg-[#FBF7FF] px-6 py-20 md:px-12">
+      <GalaxyBackground tone="pink" density="medium" />
       {/* Radial glow behind the card */}
       <div
         className="pointer-events-none absolute inset-0"

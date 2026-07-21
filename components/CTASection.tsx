@@ -1,20 +1,18 @@
 import Link from "next/link"
 import { Rocket, CalendarDays } from "lucide-react"
+import GalaxyBackground from "@/components/GalaxyBackground"
 
 export default function CTASection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-pink-100 via-purple-100 to-teal-100 px-6 py-16 md:px-12">
-      <div
-        className="pointer-events-none absolute -top-10 left-10 h-40 w-40 rounded-full bg-white/40 blur-3xl"
-        aria-hidden="true"
-      />
+      <GalaxyBackground tone="mixed" density="medium" />
       <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
         <h2 className="text-balance text-3xl font-extrabold text-slate-900 sm:text-4xl">
           Ready to Launch Your Child&apos;s Journey?
         </h2>
         <p className="max-w-xl text-pretty text-slate-600">
-          Seats for the 2026–27 mission are filling fast. Come tour our campus or start your
-          application today.
+          Seats for the 2026–27 mission are filling fast at Hadapsar&apos;s favorite nursery and
+          preschool. Come tour our campus or start your application today.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link

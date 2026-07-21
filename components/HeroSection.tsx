@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Rocket, Star } from "lucide-react"
+import { Rocket, Star, Moon, Globe2 } from "lucide-react"
 
 const TRUST_STATS = [
   { value: "100+", label: "Astronauts" },
@@ -66,6 +66,15 @@ export default function HeroSection() {
         <div className="absolute -left-16 top-24 hidden h-72 w-72 rounded-full bg-pink-300 opacity-40 blur-2xl sm:block" />
         <div className="absolute bottom-10 right-[-4rem] hidden h-80 w-80 rounded-full bg-teal-300 opacity-40 blur-2xl md:block" />
         <div className="absolute bottom-[-6rem] left-1/3 hidden h-64 w-64 rounded-full bg-purple-300 opacity-40 blur-2xl sm:block" />
+
+        {/* Floating themed icons for extra depth */}
+        <Moon
+          className="absolute left-[6%] bottom-[30%] hidden h-8 w-8 text-purple-300/60 animate-bounce sm:block"
+          style={{ animationDuration: "4s" }}
+        />
+        <Globe2
+          className="absolute right-[4%] bottom-[38%] hidden h-9 w-9 text-teal-300/60 animate-[spin_22s_linear_infinite] md:block"
+        />
       </div>
 
       {/* Content */}
@@ -79,15 +88,16 @@ export default function HeroSection() {
           </div>
 
           <h1 className="mt-6 text-4xl font-extrabold leading-tight text-slate-900 text-balance sm:text-5xl lg:text-6xl">
-            Where Little Explorers Become{" "}
+            Hadapsar&apos;s Best Nursery — Where Little Explorers Become{" "}
             <span className="bg-gradient-to-r from-amber-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
               Big Dreamers
             </span>
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-base text-slate-600 text-pretty sm:text-lg md:mx-0">
-            A premium early-learning journey where curiosity takes flight. We nurture confident,
-            caring, and creative children through play-based discovery in a safe cosmic wonderland.
+            A premium early childhood education journey in Hadapsar, Pune, where curiosity takes
+            flight. We nurture confident, caring, and creative children through play-based
+            discovery in a safe cosmic wonderland.
           </p>
 
           {/* Dual CTA */}

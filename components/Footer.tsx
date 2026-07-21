@@ -1,11 +1,14 @@
 import Link from "next/link"
 import { Rocket, Phone, Mail, MapPin, MessageCircle } from "lucide-react"
+import GalaxyBackground from "@/components/GalaxyBackground"
 
 const WHATSAPP_URL =
   "https://wa.me/919579534952?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20admissions%20at%20Planet%20Master%27s%20Nursery"
 const PHONE_NUMBER = "+91 95795 34952"
 const PHONE_HREF = "tel:+919579534952"
 const EMAIL = "hello@planetmastersnursery.com"
+const MAPS_URL =
+  "https://www.google.com/maps/dir//Planet+master's+nursery,+FWXV%2BGXH,+Satav+Plot,+Amardip+Pratishthan,+Utkarsh+Nagar,+Hadapsar,+Pune,+Maharashtra+411028/@18.5011468,73.9242248,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc2c35d225a0367:0xc31cdec3643633bc!2m2!1d73.9449724!2d18.4988052?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D"
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
@@ -19,10 +22,7 @@ const QUICK_LINKS = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-black/5 bg-[#FBF7FF] px-6 py-14 md:px-12">
-      <div
-        className="pointer-events-none absolute -bottom-24 left-1/4 hidden h-72 w-72 rounded-full bg-purple-200 opacity-30 blur-3xl md:block"
-        aria-hidden="true"
-      />
+      <GalaxyBackground tone="purple" density="light" />
       <div className="relative mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 md:grid-cols-4">
         {/* Brand */}
         <div className="sm:col-span-2 md:col-span-1">
@@ -90,7 +90,14 @@ export default function Footer() {
           <h3 className="text-sm font-semibold text-slate-900">Visit Us</h3>
           <p className="mt-4 flex items-start gap-2 text-sm text-slate-600">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" aria-hidden="true" />
-            Planet Master&apos;s Nursery Campus, your city — update this address in Footer.tsx
+            <a 
+              href={MAPS_URL} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-pink-500 transition-colors"
+            >
+              Planet Master&apos;s Nursery, Satav Plot, Utkarsh Nagar, Hadapsar, Pune 411028
+            </a>
           </p>
           <Link
             href="/book-a-visit"

@@ -1,11 +1,20 @@
 import type { Metadata } from "next"
 import PageHeader from "@/components/PageHeader"
 import ContactForm from "@/components/ContactForm"
-import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react"
+import GalaxyBackground from "@/components/GalaxyBackground"
+import { SITE_URL } from "@/lib/seo"
+import { Phone, Mail, MessageCircle, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Contact — Planet Master's Nursery",
-  description: "Get in touch with Planet Master's Nursery via phone, WhatsApp, email or our contact form.",
+  title: "Contact Us — Best Nursery in Hadapsar, Pune",
+  description:
+    "Contact Planet Master's Nursery in Hadapsar, Pune for admissions, program details or to book a campus visit. Call, WhatsApp, email or visit us directly.",
+  alternates: { canonical: `${SITE_URL}/contact` },
+  openGraph: {
+    title: "Contact Planet Master's Nursery — Hadapsar, Pune",
+    description: "Reach Hadapsar's favorite nursery and preschool by phone, WhatsApp, or email.",
+    url: `${SITE_URL}/contact`,
+  },
 }
 
 const WHATSAPP_URL =
@@ -37,7 +46,7 @@ const CONTACT_CARDS = [
   {
     Icon: Clock,
     title: "Office Hours",
-    detail: "Mon – Sat, 8:30 AM – 4:00 PM",
+    detail: "Mon – Sat, 10:00 AM – 4:00 PM",
     tint: "bg-amber-100 text-amber-600",
   },
 ]
@@ -47,13 +56,15 @@ export default function ContactPage() {
     <main>
       <PageHeader
         eyebrow="We'd Love to Hear From You"
-        title="Get in Touch"
+        title="Contact the Best Nursery in Hadapsar"
         description="Questions about admissions, programs or a campus visit? Reach out any way that's easiest for you."
         Icon={MessageCircle}
       />
 
-      <section className="bg-[#FBF7FF] px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden bg-[#FBF7FF] px-6 py-20 md:px-12">
+        <GalaxyBackground tone="amber" density="medium" />
+        <div className="relative mx-auto max-w-6xl">
+          <h2 className="sr-only">Ways to reach Planet Master&apos;s Nursery in Hadapsar</h2>
           {/* Contact method cards */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {CONTACT_CARDS.map((card) => {
@@ -92,11 +103,18 @@ export default function ContactPage() {
             <ContactForm />
 
             <div className="flex flex-col gap-6">
-              <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-3xl border border-black/5 bg-gradient-to-br from-teal-100 to-purple-100 shadow-sm lg:h-full">
-                <MapPin className="h-10 w-10 text-purple-500" aria-hidden="true" />
-                <p className="max-w-xs text-center text-sm text-slate-600">
-                  Campus map placeholder — embed a Google Maps iframe here with your exact address.
-                </p>
+              <div className="overflow-hidden rounded-3xl border border-black/5 shadow-sm h-64 lg:h-full min-h-[350px] bg-slate-50">
+                <iframe
+                  title="Planet Master's Nursery Location"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: "100%" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Planet%20master's%20nursery,%20Satav%20Plot,%20Utkarsh%20Nagar,%20Hadapsar,%20Pune,%20Maharashtra%20411028&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                  className="w-full h-full grayscale-[20%] transition-all duration-500 hover:grayscale-0"
+                />
               </div>
             </div>
           </div>
