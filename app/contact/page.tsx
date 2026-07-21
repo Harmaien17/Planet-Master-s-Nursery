@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import PageHeader from "@/components/PageHeader"
 import ContactForm from "@/components/ContactForm"
-import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react"
+import { Phone, Mail, MessageCircle, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Contact — Planet Master's Nursery",
@@ -92,18 +92,17 @@ export default function ContactPage() {
             <ContactForm />
 
             <div className="flex flex-col gap-6">
-              {/* Added overflow-hidden so the iframe doesn't break the rounded corners */}
-              <div className="h-64 overflow-hidden rounded-3xl border border-black/5 shadow-sm lg:h-full">
+              <div className="overflow-hidden rounded-3xl border border-black/5 shadow-sm h-64 lg:h-full min-h-[350px] bg-slate-50">
                 <iframe
-                  title="Campus Map Placeholder"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121059.04360434057!2d73.7805654!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin"
+                  title="Planet Master's Nursery Location"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen={true}
+                  style={{ border: 0, minHeight: "100%" }}
+                  allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="bg-slate-100"
+                  src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Planet%20master's%20nursery,%20Satav%20Plot,%20Utkarsh%20Nagar,%20Hadapsar,%20Pune,%20Maharashtra%20411028&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                  className="w-full h-full grayscale-[20%] transition-all duration-500 hover:grayscale-0"
                 />
               </div>
             </div>
