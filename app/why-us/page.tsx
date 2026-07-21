@@ -109,8 +109,7 @@ export default function WhyUsPage() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center text-slate-600">
             Located in the heart of Hadapsar. We&apos;d love to show you around our safe and creative learning environment.
-            Located in the heart of Hadapsar. We'd love to show you around our safe and creative learning environment.
-          </p>
+           </p>
 
           <div className="mt-12 overflow-hidden rounded-3xl border border-black/5 shadow-xl bg-slate-50">
             <iframe
